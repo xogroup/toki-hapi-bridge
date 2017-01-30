@@ -1,0 +1,7 @@
+.idea
+coverage
+.jscsrc
+.jshintrc
+.eslintrc
+node_modules
+.codeclimate.yml

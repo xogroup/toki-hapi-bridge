@@ -1,0 +1,36 @@
+{
+  "name": "chronos-bridge-hapi",
+  "version": "0.0.1",
+  "private": false,
+  "description": "Plugin",
+  "homepage": "https://git.xogrp.com/LocalPartners/chronos-bridge-hapi#readme",
+  "main": "src/implementation.js",
+  "bugs": {
+    "url": "https://git.xogrp.com/LocalPartners/chronos-bridge-hapi/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.xogrp.com/LocalPartners/chronos-bridge-hapi.git"
+  },
+  "keywords": [
+    "plugin",
+    "chronos-shim-hapi"
+  ],
+  "author": "XO Group Team",
+  "license": "ISC",
+  "devDependencies": {
+    "bluebird": "3.x",
+    "eslint": "^3.10.2",
+    "eslint-plugin-xogroup": "^1.x.x",
+    "mocha": "3.x",
+    "xo-test-helper": "*"
+  },
+  "peerDependencies": {
+    "bluebird": "3.x"
+  },
+  "dependencies": {
+    "boom": "^4.2.0",
+    "hoek": "^4.1.0",
+    "nc-singleton": "^1.0.0"
+  }
+}

@@ -1,0 +1,22 @@
+module.exports = class Chronos {
+    constructor(server) {
+        server.get('/success', this.success);
+        server.put('/success', this.success);
+        server.post('/success', this.success);
+        server.del('/success', this.success);
+        server.patch('/success', this.success);
+
+        server.get('/success/{guid}', this.success);
+
+        server.get('/fail', this.err);
+        server.get('/fail/{guid}', this.err);
+    }
+
+    success(req, res) {
+        return res.send(`${req.method} ${req.path}`).code(200);
+    }
+
+    err(req, res) {
+        return res.send(new Error(`${req.method} ${req.path}`));
+    }
+};
