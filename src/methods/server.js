@@ -6,6 +6,7 @@ const EventEmitter = require('events');
 
 module.exports = class Server extends EventEmitter {
     constructor(hapiServer) {
+        super();
         this.internalServer = hapiServer;
 
         this.internalServer.on('start', ()=>{

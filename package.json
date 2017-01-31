@@ -4,7 +4,7 @@
   "private": false,
   "description": "Plugin",
   "homepage": "https://git.xogrp.com/LocalPartners/chronos-bridge-hapi#readme",
-  "main": "src/implementation.js",
+  "main": "src/plugin.js",
   "bugs": {
     "url": "https://git.xogrp.com/LocalPartners/chronos-bridge-hapi/issues"
   },

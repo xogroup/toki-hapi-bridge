@@ -5,7 +5,6 @@ const Chronos = require('chronos');
 const register = function(hapiServer, options, next) {
     const server = new Server(hapiServer);
     const chronos = new Chronos(server);
-
     return next();
 };
 
