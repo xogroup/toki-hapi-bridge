@@ -12,11 +12,11 @@ module.exports = class Chronos {
         server.get('/fail/{guid}', this.err);
     }
 
-    success(req, reply) {
-        return reply(`${req.method} ${req.path} ${JSON.stringify(req.query)}`);
+    success(req, res) {
+        return res.send(`${req.method} ${req.path} ${JSON.stringify(req.query)}`);
     }
 
-    err(req, reply) {
-        return reply(new Error(`${req.method} ${req.path} ${JSON.stringify(req.query)}`));
+    err(req, res) {
+        return res.send(new Error(`${req.method} ${req.path} ${JSON.stringify(req.query)}`));
     }
 };
