@@ -13,15 +13,15 @@ describe('Chronos Bridge Hapi ', function() {
         let response = null;
 
         beforeEach(()=>{
-            hapiResponseSpy = xoth.sinon.spy(hapiResponse, 'code');
-            hapiResponseSpy = xoth.sinon.spy(hapiResponseSpy);
+            hapiResponseSpy = xoth.sinon.spy(hapiResponse);
+            //hapiResponseSpy.prototype.code = xoth.sinon.spy(hapiResponse.prototype, 'code');
 
             response = new Response(hapiResponseSpy);
         });
 
         afterEach(()=>{
-            hapiResponse.code.restore();
-            hapiResponseSpy.restore();
+            //hapiResponseSpy.code.restore();
+            //hapiResponseSpy.restore();
         });
 
         it('should send a string reply successfully', ()=>{
@@ -43,9 +43,9 @@ describe('Chronos Bridge Hapi ', function() {
         });
 
         it('should send a reply and then a code successfully', ()=>{
-            response.send('Some payload').code(418);
+            response.send('Some payload').status(418);
             hapiResponseSpy.should.of.been.calledOnce.and.calledWith('Some payload');
-            hapiResponse.code.should.of.been.calledOnce.and.calledWith(418);
+            response.hapiResponseObj.code.should.of.been.calledOnce.and.calledWith(418);
         });
 
     });

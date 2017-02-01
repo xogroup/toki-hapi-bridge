@@ -1,13 +1,13 @@
 'use strict';
 
 const reply = function(payload) {
-    return {
-        code: reply.code
-    };
+    return responseObj;
 };
 
-reply.code = function(status) {
-    return status;
-}
+const responseObj = {
+    code: (status)=>{
+        return status;
+    }
+};
 
 module.exports = reply;

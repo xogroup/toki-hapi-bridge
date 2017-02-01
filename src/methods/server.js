@@ -69,7 +69,7 @@ module.exports = class Server extends EventEmitter {
     proxyHandler(handler) {
         return (hapiReq, hapiReply)=>{
             const req = RequestDecorator(hapiReq);
-            const res = ResponseDecorator(hapiReply);
+            const res = new ResponseDecorator(hapiReply);
 
             return handler(req, res);
         };

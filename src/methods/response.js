@@ -3,7 +3,7 @@
 const Boom = require('boom');
 const UnsupportedTypeError = require('./../errors/unsupportedType');
 
-class Response {
+module.exports = class Response {
     constructor(hapiReply) {
         this.internalReply = hapiReply;
     }
@@ -19,7 +19,7 @@ class Response {
             if (this.futureCode) {
                 this.hapiResponseObj.code(this.futureCode);
             }
-            console.log('response', this);
+            console.log("Returning this", this);
             return this;
         }
 
@@ -62,7 +62,3 @@ class Response {
         return new UnsupportedTypeError(`${typeof payload} is not supported`);
     }
 }
-
-module.exports = function(hapiReply) {
-    return new Response(hapiReply);
-};
