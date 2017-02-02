@@ -6,6 +6,7 @@ const UnsupportedTypeError = require('./../errors/unsupportedType');
 module.exports = class Response {
     constructor(hapiReply) {
         this.internalReply = hapiReply;
+        this.futureHeaders = [];
     }
     send(payload) {
         //payload can be an object, a promise, a string, or an error
@@ -17,6 +18,11 @@ module.exports = class Response {
             this.hapiResponseObj = this.internalReply(payload);
             if (this.futureCode) {
                 this.hapiResponseObj.code(this.futureCode);
+            }
+            if (this.futureHeaders.length) {
+                this.futureHeaders.forEach((header)=>{
+                    this.hapiResponseObj.header(header.name, header.value);
+                });
             }
 
             return this;
@@ -43,6 +49,15 @@ module.exports = class Response {
             return this;
         }
         this.futureCode = code;
+        return this;
+    }
+    header(header, value) {
+        if (this.hapiResponseObj) {
+            this.hapiResponseObj.header(header, value);
+            return this;
+        }
+
+        this.futureHeaders.push({name: header, value: value});
         return this;
     }
     error(payload) {

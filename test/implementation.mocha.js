@@ -13,6 +13,7 @@ describe('Chronos Bridge Hapi ', function() {
 
         beforeEach(()=>{
             xoth.sinon.spy(hapiReply.response, 'code');
+            xoth.sinon.spy(hapiReply.response, 'header');
             xoth.sinon.spy(hapiReply, 'reply');
 
             response = new Response(hapiReply.reply);
@@ -20,6 +21,7 @@ describe('Chronos Bridge Hapi ', function() {
 
         afterEach(()=>{
             hapiReply.response.code.restore();
+            hapiReply.response.header.restore();
             hapiReply.reply.restore();
         });
 
@@ -51,6 +53,18 @@ describe('Chronos Bridge Hapi ', function() {
             response.status(418).send('Some payload');
             hapiReply.reply.should.of.been.calledOnce.and.calledWith('Some payload');
             hapiReply.response.code.should.of.been.calledOnce.and.calledWith(418);
+        });
+
+        it('should send a reply and then a header successfully', ()=>{
+            response.send('Some payload').header('test', 'foobar');
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith('Some payload');
+            hapiReply.response.header.should.of.been.calledOnce.and.calledWith('test', 'foobar');
+        });
+
+        it('should set a header and then reply successfully', ()=>{
+            response.header('test', 'foobar').send('Some payload');
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith('Some payload');
+            hapiReply.response.header.should.of.been.calledOnce.and.calledWith('test', 'foobar');
         });
 
     });

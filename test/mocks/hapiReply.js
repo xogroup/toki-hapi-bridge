@@ -3,6 +3,9 @@
 const response = {
     code: (status)=>{
         return status;
+    },
+    header: (header)=>{
+        return header;
     }
 };
 
