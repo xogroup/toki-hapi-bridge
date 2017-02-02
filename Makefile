@@ -2,10 +2,10 @@ NAME=xolocalvendors/chronos-shim-hapi
 VERSION=latest
 
 test:
-	@istanbul cover node_modules/.bin/_mocha -- --recursive -w
+	@istanbul cover node_modules/.bin/lab
 
 debug-test:
-	node_modules/.bin/mocha --debug-brk --recursive -w
+	node_modules/.bin/lab --debug-brk --recursive -w
 
 clean:
 	@rm -f npm-shrinkwrap.json

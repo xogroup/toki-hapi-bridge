@@ -27,8 +27,7 @@
     "lab": "^12.1.0",
     "mocha": "3.x",
     "proxyquire": "^1.7.11",
-    "sinon": "^1.17.7",
-    "xo-test-helper": "*"
+    "sinon": "^1.17.7"
   },
   "peerDependencies": {
 
