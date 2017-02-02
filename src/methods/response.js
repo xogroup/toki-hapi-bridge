@@ -15,11 +15,10 @@ module.exports = class Response {
 
         if (payload instanceof Promise || typeof payload === 'string' || typeof payload === 'object') {
             this.hapiResponseObj = this.internalReply(payload);
-
             if (this.futureCode) {
                 this.hapiResponseObj.code(this.futureCode);
             }
-            console.log("Returning this", this);
+
             return this;
         }
 
@@ -43,7 +42,6 @@ module.exports = class Response {
             this.hapiResponseObj.code(code);
             return this;
         }
-
         this.futureCode = code;
         return this;
     }

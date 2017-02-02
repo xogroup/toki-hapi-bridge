@@ -3,35 +3,34 @@
 const Xoth = require('xo-test-helper');
 const xoth = new Xoth();
 
-const hapiResponse = require('./mocks/hapiResponse');
+const hapiReply = require('./mocks/hapiReply');
 const Response = require('./../src/methods/response');
 const Promise = require('bluebird');
 
 describe('Chronos Bridge Hapi ', function() {
     describe.only('Response', function() {
-        let hapiResponseSpy;
         let response = null;
 
         beforeEach(()=>{
-            hapiResponseSpy = xoth.sinon.spy(hapiResponse);
-            //hapiResponseSpy.prototype.code = xoth.sinon.spy(hapiResponse.prototype, 'code');
+            xoth.sinon.spy(hapiReply.response, 'code');
+            xoth.sinon.spy(hapiReply, 'reply');
 
-            response = new Response(hapiResponseSpy);
+            response = new Response(hapiReply.reply);
         });
 
         afterEach(()=>{
-            //hapiResponseSpy.code.restore();
-            //hapiResponseSpy.restore();
+            hapiReply.response.code.restore();
+            hapiReply.reply.restore();
         });
 
         it('should send a string reply successfully', ()=>{
             response.send('Some payload');
-            hapiResponseSpy.should.of.been.calledOnce.and.calledWith('Some payload');
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith('Some payload');
         });
 
         it('should send an object reply successfully', ()=>{
             response.send({foo: 'bar'});
-            hapiResponseSpy.should.of.been.calledOnce.and.calledWith({foo: 'bar'});
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith({foo: 'bar'});
         });
 
         it('should send a promise reply successfully', ()=>{
@@ -39,13 +38,19 @@ describe('Chronos Bridge Hapi ', function() {
                 setTimeout(resolve, 100);
             });
             response.send(testPromise);
-            hapiResponseSpy.should.of.been.calledOnce.and.calledWith(testPromise);
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith(testPromise);
         });
 
         it('should send a reply and then a code successfully', ()=>{
             response.send('Some payload').status(418);
-            hapiResponseSpy.should.of.been.calledOnce.and.calledWith('Some payload');
-            response.hapiResponseObj.code.should.of.been.calledOnce.and.calledWith(418);
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith('Some payload');
+            hapiReply.response.code.should.of.been.calledOnce.and.calledWith(418);
+        });
+
+        it('should set a code and then reply successfully', ()=>{
+            response.status(418).send('Some payload');
+            hapiReply.reply.should.of.been.calledOnce.and.calledWith('Some payload');
+            hapiReply.response.code.should.of.been.calledOnce.and.calledWith(418);
         });
 
     });
