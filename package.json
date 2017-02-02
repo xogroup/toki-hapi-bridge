@@ -20,17 +20,20 @@
   "license": "ISC",
   "devDependencies": {
     "bluebird": "3.x",
-    "eslint": "^3.10.2",
+    "code": "^4.0.0",
     "eslint-plugin-xogroup": "^1.x.x",
+    "eslint": "^3.10.2",
+    "hapi": "^16.1.0",
+    "lab": "^12.1.0",
     "mocha": "3.x",
+    "proxyquire": "^1.7.11",
+    "sinon": "^1.17.7",
     "xo-test-helper": "*"
   },
   "peerDependencies": {
-    "bluebird": "3.x"
+
   },
   "dependencies": {
-    "boom": "^4.2.0",
-    "hoek": "^4.1.0",
-    "nc-singleton": "^1.0.0"
+    "boom": "^4.2.0"
   }
 }
