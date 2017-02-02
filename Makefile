@@ -12,7 +12,6 @@ clean:
 	@rm -rf ./node_modules
 	npm install --production
 	npm prune
-	shonkwrap
 
 install:
 	@rm -rf ./node_modules

@@ -5,10 +5,6 @@ pluginDev:
     - ../src:/opt/app/current/src
     - ../test:/opt/app/current/test
     - ../coverage:/opt/app/current/coverage
-  links:
-    - pgbox
-    - esbox
-    - rabbitbox
 pluginDebug:
   image: xolocalvendors/chronos-shim-hapi
   command: -dt
@@ -17,14 +13,6 @@ pluginDebug:
   volumes:
     - ../src:/opt/app/current/src
     - ../test:/opt/app/current/test
-  links:
-    - pgbox
-    - esbox
-    - rabbitbox
 pluginJenkins:
   image: xolocalvendors/chronos-shim-hapi
   command: -j
-  links:
-    - pgbox
-    - esbox
-    - rabbitbox
