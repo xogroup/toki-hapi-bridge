@@ -43,6 +43,12 @@ patch(path, handler)
 
 Path supports params (`/mypath/{guid}/etc` will save the value in the spot of 'guid' to `request.params.guid`).
 
+#### Events
+Every Server instance inherits from EventEmitter and will emit events. Current events include:
+
++ `start` when the server is started
++ `stop` when the server is stopped
+
 ### Request
 
 Request is a decorated version of the Node http-server request object. It will always have the following:
