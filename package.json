@@ -3,17 +3,17 @@
   "version": "1.0.0",
   "private": false,
   "description": "Plugin",
-  "homepage": "https://git.xogrp.com/LocalPartners/toki-hapi-bridge#readme",
+  "homepage": "https://github.com/xogroup/toki-hapi-bridge#readme",
   "main": "src/plugin.js",
   "bugs": {
-    "url": "https://git.xogrp.com/LocalPartners/toki-hapi-bridge/issues"
+    "url": "https://github.com/xogroup/toki-hapi-bridge/issues"
   },
   "scripts": {
     "test": "node_modules/.bin/lab -c"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.xogrp.com/LocalPartners/toki-hapi-bridge.git"
+    "url": "git+https://github.com/xogroup/toki-hapi-bridge.git"
   },
   "keywords": [
     "toki",
