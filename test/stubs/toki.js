@@ -1,4 +1,4 @@
-module.exports = class Chronos {
+module.exports = class Toki {
     constructor(server) {
         server.get('/success', this.success);
         server.put('/success', this.success);
