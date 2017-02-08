@@ -1,15 +1,15 @@
-#chronos-shim-hapi
-This is a bridge designed to facilitate using Chronos on a hapi based server.
+# Toki-Hapi-Bridge
+This is a bridge designed to facilitate using parts of the Toki project on a hapi based server.
 
 ## Download
 
 ```bash
-npm install --save chronos-shim-hapi
+npm install --save toki-hapi-bridge
 ```
 
 ## Usage
 ```Javascript
-const bridge = require('chronos-shim-hapi');
+const bridge = require('toki-hapi-bridge');
 server = new Hapi.Server();
 
 server.connection({
@@ -66,41 +66,3 @@ Response is an object which allows you to send data back to the client as well a
 `response.error(error)` where payload is an instance of error will send back a default status code as well as show the error.
 `response.code(status)` where status is a number will send back that statusCode. It can be called before or after send().
 `response.header(name, value)` will set the named header to the new value. It can be called before or after send().
-
-
-## Development Usage
-
-### Install Dependencies
-Install the dependencies for this project.
-```Text
-make clean
-```
-
-Install the dependencies based on package.json.
-```Text
-make install
-```
-
-### Test Project
-Run tests inside your container (This should be uses)
-```Text
-make run
-```
-
-Run mocha test locally.
-```Text
-make test
-```
-
-Both methods create ca coverage report after executing
-
-### Debug Project
-Run tests in debug mode.  Allows interactive debug.
-```Text
-make debug-test
-```
-
-Run tests in debug mode inside of Docker.  Allows interactive debug with container port 5858 opened.
- ```Text
- make run-debug test
- ```

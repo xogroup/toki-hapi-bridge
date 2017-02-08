@@ -9,9 +9,9 @@ const Promise = require('bluebird');
 const sinon = require('sinon');
 
 const hapiReply = require('./mocks/hapiReply');
-const Response = require('./../src/methods/response');
+const Response = require('./../lib/methods/response');
 
-lab.describe('Chronos Bridge Hapi ', function() {
+lab.describe('Toki Hapi Bridge', function() {
     lab.describe('Response', function() {
         let response = null;
 
@@ -96,8 +96,8 @@ lab.describe('Chronos Bridge Hapi ', function() {
     lab.describe('Server', function() {
         let server = null;
         lab.before(()=>{
-            const chronosStub = require('./stubs/chronos');
-            const bridge = proxyquire(__dirname + '/../src/plugin', {'chronos': chronosStub});
+            const tokiStub = require('./stubs/toki');
+            const bridge = proxyquire(__dirname + '/../lib/plugin', {'toki': tokiStub});
 
             server = new Hapi.Server();
 

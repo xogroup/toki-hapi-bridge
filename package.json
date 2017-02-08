@@ -1,20 +1,24 @@
 {
-  "name": "chronos-bridge-hapi",
+  "name": "toki-hapi-bridge",
   "version": "0.0.1",
   "private": false,
   "description": "Plugin",
-  "homepage": "https://git.xogrp.com/LocalPartners/chronos-bridge-hapi#readme",
+  "homepage": "https://git.xogrp.com/LocalPartners/toki-hapi-bridge#readme",
   "main": "src/plugin.js",
   "bugs": {
-    "url": "https://git.xogrp.com/LocalPartners/chronos-bridge-hapi/issues"
+    "url": "https://git.xogrp.com/LocalPartners/toki-hapi-bridge/issues"
+  },
+  "scripts": {
+    "test": "node_modules/.bin/lab -c"  
   },
   "repository": {
     "type": "git",
-    "url": "git+https://git.xogrp.com/LocalPartners/chronos-bridge-hapi.git"
+    "url": "git+https://git.xogrp.com/LocalPartners/toki-hapi-bridge.git"
   },
   "keywords": [
-    "plugin",
-    "chronos-shim-hapi"
+    "toki",
+    "hapi",
+    "toki-bridge"
   ],
   "author": "XO Group Team",
   "license": "ISC",
@@ -25,7 +29,6 @@
     "eslint": "^3.10.2",
     "hapi": "^16.1.0",
     "lab": "^12.1.0",
-    "mocha": "3.x",
     "proxyquire": "^1.7.11",
     "sinon": "^1.17.7"
   },
