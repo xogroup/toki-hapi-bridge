@@ -9,6 +9,8 @@ Lead Maintainer: [Derrick Hinkle](https://github.com/dhinklexo)
 
 <!-- Badges Go Here -->
 [![Build Status](https://travis-ci.org/xogroup/toki-hapi-bridge.svg?branch=master)](https://travis-ci.org/xogroup/toki-hapi-bridge)
+[![Known Vulnerabilities](https://snyk.io/test/github/xogroup/toki-hapi-bridge/badge.svg)](https://snyk.io/test/github/xogroup/toki-hapi-bridge)
+[![NSP Status](https://nodesecurity.io/orgs/xo-group/projects/4f17f141-56c4-4cb9-80a4-665c514d73cc/badge)](https://nodesecurity.io/orgs/xo-group/projects/4f17f141-56c4-4cb9-80a4-665c514d73cc)
 <!-- End Badges -->
 <!-- Quick Example -->
 ## Example
