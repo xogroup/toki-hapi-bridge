@@ -1,6 +1,6 @@
 {
   "name": "toki-hapi-bridge",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": false,
   "description": "Plugin",
   "homepage": "https://git.xogrp.com/LocalPartners/toki-hapi-bridge#readme",
@@ -9,7 +9,7 @@
     "url": "https://git.xogrp.com/LocalPartners/toki-hapi-bridge/issues"
   },
   "scripts": {
-    "test": "node_modules/.bin/lab -c"  
+    "test": "node_modules/.bin/lab -c"
   },
   "repository": {
     "type": "git",
@@ -32,9 +32,7 @@
     "proxyquire": "^1.7.11",
     "sinon": "^1.17.7"
   },
-  "peerDependencies": {
-
-  },
+  "peerDependencies": {},
   "dependencies": {
     "boom": "^4.2.0"
   }
