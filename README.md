@@ -8,7 +8,7 @@ This is a bridge designed to facilitate using parts of the Toki project on a hap
 Lead Maintainer: [Derrick Hinkle](https://github.com/dhinklexo)
 
 <!-- Badges Go Here -->
-
+[![Build Status](https://travis-ci.org/xogroup/toki-hapi-bridge.svg?branch=master)](https://travis-ci.org/xogroup/toki-hapi-bridge)
 <!-- End Badges -->
 <!-- Quick Example -->
 ## Example
