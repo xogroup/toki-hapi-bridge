@@ -1,5 +1,8 @@
+'use strict';
+
 module.exports = class Toki {
     constructor(server) {
+
         server.get('/success', this.success);
         server.put('/success', this.success);
         server.post('/success', this.success);
@@ -13,10 +16,12 @@ module.exports = class Toki {
     }
 
     success(req, res) {
+
         return res.send(`${req.method} ${req.path} ${JSON.stringify(req.query)}`);
     }
 
     err(req, res) {
+
         return res.send(new Error(`${req.method} ${req.path} ${JSON.stringify(req.query)}`));
     }
 };

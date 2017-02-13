@@ -3,101 +3,124 @@
 const expect = require('code').expect;
 const Lab = require('lab');
 const lab = exports.lab = Lab.script();
+const describe = lab.describe;
+const it = lab.it;
+
 const Hapi = require('hapi');
 const proxyquire = require('proxyquire').noCallThru();
 const Promise = require('bluebird');
-const sinon = require('sinon');
+const Sinon = require('Sinon');
 
-const hapiReply = require('./mocks/hapiReply');
+const HapiReply = require('./mocks/HapiReply');
 const Response = require('./../lib/methods/response');
 
-lab.describe('Toki Hapi Bridge', function() {
-    lab.describe('Response', function() {
+describe('Toki Hapi Bridge', () => {
+
+    describe('Response', () => {
+
         let response = null;
 
-        lab.beforeEach((done)=>{
-            sinon.spy(hapiReply.response, 'code');
-            sinon.spy(hapiReply.response, 'header');
-            sinon.spy(hapiReply, 'reply');
+        lab.beforeEach((done) => {
 
-            response = new Response(hapiReply.reply);
+            Sinon.spy(HapiReply.response, 'code');
+            Sinon.spy(HapiReply.response, 'header');
+            Sinon.spy(HapiReply, 'reply');
+
+            response = new Response(HapiReply.reply);
             done();
         });
 
-        lab.afterEach((done)=>{
-            hapiReply.response.code.restore();
-            hapiReply.response.header.restore();
-            hapiReply.reply.restore();
+        lab.afterEach((done) => {
+
+            HapiReply.response.code.restore();
+            HapiReply.response.header.restore();
+            HapiReply.reply.restore();
             done();
         });
 
-        lab.test('should send a string reply successfully', (done)=>{
+        it('should send a string reply successfully', (done) => {
+
             response.send('Some payload');
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, 'Some payload');
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
             done();
         });
 
-        lab.test('should send an object reply successfully', (done)=>{
-            response.send({foo: 'bar'});
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, {foo: 'bar'});
+        it('should send an object reply successfully', (done) => {
+
+            response.send({
+                foo: 'bar'
+            });
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, {
+                foo: 'bar'
+            });
             done();
         });
 
-        lab.test('should send a promise reply successfully', (done)=>{
-            let testPromise = new Promise((resolve, reject)=>{
+        it('should send a promise reply successfully', (done) => {
+
+            const testPromise = new Promise((resolve, reject) => {
+
                 setTimeout(resolve, 100);
             });
             response.send(testPromise);
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, testPromise);
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, testPromise);
             done();
         });
 
-        lab.test('should send a reply and then a code successfully', (done)=>{
+        it('should send a reply and then a code successfully', (done) => {
+
             response.send('Some payload').status(418);
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, 'Some payload');
-            sinon.assert.calledOnce(hapiReply.response.code);
-            sinon.assert.calledWith(hapiReply.response.code, 418);
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
+            Sinon.assert.calledOnce(HapiReply.response.code);
+            Sinon.assert.calledWith(HapiReply.response.code, 418);
             done();
         });
 
-        lab.test('should set a code and then reply successfully', (done)=>{
+        it('should set a code and then reply successfully', (done) => {
+
             response.status(418).send('Some payload');
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, 'Some payload');
-            sinon.assert.calledOnce(hapiReply.response.code);
-            sinon.assert.calledWith(hapiReply.response.code, 418);
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
+            Sinon.assert.calledOnce(HapiReply.response.code);
+            Sinon.assert.calledWith(HapiReply.response.code, 418);
             done();
         });
 
-        lab.test('should send a reply and then a header successfully', (done)=>{
+        it('should send a reply and then a header successfully', (done) => {
+
             response.send('Some payload').header('test', 'foobar');
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, 'Some payload');
-            sinon.assert.calledOnce(hapiReply.response.header);
-            sinon.assert.calledWith(hapiReply.response.header, 'test', 'foobar');
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
+            Sinon.assert.calledOnce(HapiReply.response.header);
+            Sinon.assert.calledWith(HapiReply.response.header, 'test', 'foobar');
             done();
         });
 
-        lab.test('should set a header and then reply successfully', (done)=>{
+        it('should set a header and then reply successfully', (done) => {
+
             response.header('test', 'foobar').send('Some payload');
-            sinon.assert.calledOnce(hapiReply.reply);
-            sinon.assert.calledWith(hapiReply.reply, 'Some payload');
-            sinon.assert.calledOnce(hapiReply.response.header);
-            sinon.assert.calledWith(hapiReply.response.header, 'test', 'foobar');
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
+            Sinon.assert.calledOnce(HapiReply.response.header);
+            Sinon.assert.calledWith(HapiReply.response.header, 'test', 'foobar');
             done();
         });
 
     });
 
-    lab.describe('Server', function() {
+    describe('Server', () => {
+
         let server = null;
-        lab.before(()=>{
+        lab.before(() => {
+
             const tokiStub = require('./stubs/toki');
-            const bridge = proxyquire(__dirname + '/../lib/plugin', {'toki': tokiStub});
+            const bridge = proxyquire(__dirname + '/../lib/plugin', {
+                'toki': tokiStub
+            });
 
             server = new Hapi.Server();
 
@@ -109,118 +132,142 @@ lab.describe('Toki Hapi Bridge', function() {
             return server.register(bridge);
         });
 
-        lab.test('should successfully get the success endpoint', ()=>{
+        it('should successfully get the success endpoint', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/success'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('get /success {}');
             });
         });
 
-        lab.test('should successfully post the success endpoint', ()=>{
+        it('should successfully post the success endpoint', () => {
+
             return server.inject({
                 method: 'POST',
                 url   : '/success'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('post /success {}');
             });
         });
 
-        lab.test('should successfully put the success endpoint', ()=>{
+        it('should successfully put the success endpoint', () => {
+
             return server.inject({
                 method: 'PUT',
                 url   : '/success'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('put /success {}');
             });
         });
 
-        lab.test('should successfully patch the success endpoint', ()=>{
+        it('should successfully patch the success endpoint', () => {
+
             return server.inject({
                 method: 'PATCH',
                 url   : '/success'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('patch /success {}');
             });
         });
 
-        lab.test('should successfully delete the success endpoint', ()=>{
+        it('should successfully delete the success endpoint', () => {
+
             return server.inject({
                 method: 'DELETE',
                 url   : '/success'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('delete /success {}');
             });
         });
 
-        lab.test('should successfully get the success endpoint with a param', ()=>{
+        it('should successfully get the success endpoint with a param', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/success/thisisarandomguid'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('get /success/thisisarandomguid {}');
             });
         });
 
-        lab.test('should successfully get the success endpoint with a query', ()=>{
+        it('should successfully get the success endpoint with a query', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/success?foo=bar&baz=buzz'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('get /success {"foo":"bar","baz":"buzz"}');
             });
         });
 
-        lab.test('should successfully get the success endpoint with a param and a query', ()=>{
+        it('should successfully get the success endpoint with a param and a query', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/success/thisisarandomguid?foo=bar&baz=buzz'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(200);
                 expect(res.payload).to.equal('get /success/thisisarandomguid {"foo":"bar","baz":"buzz"}');
             });
         });
 
-        lab.test('should unsuccessfully get the failure endpoint', ()=>{
+        it('should unsuccessfully get the failure endpoint', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/fail'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(500);
             });
         });
 
-        lab.test('should unsuccessfully get the failure endpoint with a param', ()=>{
+        it('should unsuccessfully get the failure endpoint with a param', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/fail/thisisarandomguid'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(500);
             });
         });
 
-        lab.test('should unsuccessfully get the failure endpoint with a query', ()=>{
+        it('should unsuccessfully get the failure endpoint with a query', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/fail?foo=bar&baz=buzz'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(500);
             });
         });
 
-        lab.test('should unsuccessfully get the failure endpoint with a param and a query', ()=>{
+        it('should unsuccessfully get the failure endpoint with a param and a query', () => {
+
             return server.inject({
                 method: 'GET',
                 url   : '/fail/thisisarandomguid?foo=bar&baz=buzz'
-            }).then((res)=>{
+            }).then((res) => {
+
                 expect(res.statusCode).to.equal(500);
             });
         });

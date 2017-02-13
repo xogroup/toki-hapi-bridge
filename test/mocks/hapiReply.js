@@ -1,16 +1,22 @@
 'use strict';
 
 const response = {
-    code: (status)=>{
+    code: (status) => {
+
         return status;
     },
-    header: (header)=>{
+    header: (header) => {
+
         return header;
     }
 };
 
-const reply = function(payload) {
+const reply = function (payload) {
+
     return response;
 };
 
-module.exports = {reply, response};
+module.exports = {
+    reply,
+    response
+};
