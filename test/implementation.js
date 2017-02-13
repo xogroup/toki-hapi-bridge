@@ -9,9 +9,9 @@ const it = lab.it;
 const Hapi = require('hapi');
 const proxyquire = require('proxyquire').noCallThru();
 const Promise = require('bluebird');
-const Sinon = require('Sinon');
+const Sinon = require('sinon');
 
-const HapiReply = require('./mocks/HapiReply');
+const HapiReply = require('./mocks/hapiReply');
 const Response = require('./../lib/methods/response');
 
 describe('Toki Hapi Bridge', () => {
