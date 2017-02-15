@@ -7,7 +7,7 @@ module.exports = class Toki {
         server.get('/success', this.success);
         server.put('/success', this.success);
         server.post('/success', this.success);
-        server.del('/success', this.success);
+        server.delete('/success', this.success);
         server.patch('/success', this.success);
 
         server.get('/success/{guid}', this.success);
