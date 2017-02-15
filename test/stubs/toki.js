@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = class Toki {
-    constructor(server) {
+    constructor(config) {
 
+        const server = config.router;
         server.get('/success', this.success);
         server.put('/success', this.success);
         server.post('/success', this.success);
