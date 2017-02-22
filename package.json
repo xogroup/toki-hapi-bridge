@@ -1,6 +1,6 @@
 {
   "name": "toki-hapi-bridge",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "private": false,
   "description": "hapijs plugin for bridging into the toki core runtime",
   "homepage": "https://github.com/xogroup/toki-hapi-bridge#readme",
