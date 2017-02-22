@@ -16,6 +16,11 @@ const reply = function (payload) {
     return response;
 };
 
+reply.continue = function () {
+
+    return true;
+};
+
 module.exports = {
     reply,
     response
