@@ -73,6 +73,7 @@ Request is a decorated version of the Node http-server request object. It will a
 + `request.path` - the current path
 + `request.method` - the method which called this request
 + `request.headers` - an object containing all headers
++ `request.rawRequest` - The raw, underlying request object. This is guaranteed to be a readableStream. It may or may not be an instance of http.IncomingMessage.
 
 
 ## Response
@@ -83,3 +84,4 @@ Response is an object which allows you to send data back to the client as well a
 + `response.error(error)` where payload is an instance of error will send back a default status code as well as show the error.
 + `response.code(status)` where status is a number will send back that statusCode. It can be called before or after send().
 + `response.header(name, value)` will set the named header to the new value. It can be called before or after send().
++ `response.rawResponse` is the raw underlying Response object. This is guaranteed to be a writableStream. It may or may not be an instance of http.ServerResponse.

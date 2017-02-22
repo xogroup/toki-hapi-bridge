@@ -14,6 +14,9 @@ const Sinon = require('sinon');
 const HapiReply = require('./mocks/hapiReply');
 const Response = require('./../lib/methods/response');
 
+const Http = require('http');
+const Stream = require('stream');
+
 describe('Toki Hapi Bridge', () => {
 
     describe('Response', () => {
@@ -41,6 +44,14 @@ describe('Toki Hapi Bridge', () => {
         it('should send a string reply successfully', (done) => {
 
             response.send('Some payload');
+            Sinon.assert.calledOnce(HapiReply.reply);
+            Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
+            done();
+        });
+
+        it('should end with a string reply successfully', (done) => {
+
+            response.end('Some payload');
             Sinon.assert.calledOnce(HapiReply.reply);
             Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
             done();
@@ -269,6 +280,41 @@ describe('Toki Hapi Bridge', () => {
             }).then((res) => {
 
                 expect(res.statusCode).to.equal(500);
+            });
+        });
+
+    });
+    describe('Raw request and response objects', () => {
+
+        it('should verify that a node req and res object exist', (done) => {
+
+            const tokiStub = function (config) {
+
+                config.router.get('/test', (req, res) => {
+
+                    expect(res.rawResponse).to.be.instanceof(Http.ServerResponse);
+                    expect(req.rawRequest).to.be.instanceof(Stream.Readable); //Hapi's "request" isn't a real Http.IncomingMessage, but it'll do
+                    done();
+                });
+            };
+
+            const bridge = proxyquire(__dirname + '/../lib/plugin', {
+                'toki': tokiStub
+            });
+
+            const localServer = new Hapi.Server();
+
+            localServer.connection({
+                host: 'localhost',
+                port: 5001
+            });
+
+            localServer.register(bridge).then( () => {
+
+                return localServer.inject({
+                    method: 'GET',
+                    url: '/test'
+                });
             });
         });
     });
