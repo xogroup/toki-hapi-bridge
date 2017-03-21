@@ -82,6 +82,6 @@ Response is an object which allows you to send data back to the client as well a
 
 + `response.send(payload)` where payload is a string, an object or a promise. If payload is an instance of error, it'll be sent to response.error().
 + `response.error(error)` where payload is an instance of error will send back a default status code as well as show the error.
-+ `response.code(status)` where status is a number will send back that statusCode. It can be called before or after send().
++ `response.statusCode(status)` where status is a number will send back that statusCode. It can be called before or after send().
 + `response.header(name, value)` will set the named header to the new value. It can be called before or after send().
 + `response.rawResponse` is the raw underlying Response object. This is guaranteed to be a writableStream. It may or may not be an instance of http.ServerResponse.

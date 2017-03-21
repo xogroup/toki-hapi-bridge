@@ -24,7 +24,7 @@ module.exports = (server)=>{
 
     //shorthand for route(), showing params in urls
     server.get('/hello/{name}', (request, response)=>{
-        return response.send({hello: request.params.name}).code(200);
+        return response.send({hello: request.params.name}).statusCode(200);
     });
 };
 ```

@@ -83,7 +83,7 @@ describe('Toki Hapi Bridge', () => {
 
         it('should send a reply and then a code successfully', (done) => {
 
-            response.send('Some payload').status(418);
+            response.send('Some payload').statusCode(418);
             Sinon.assert.calledOnce(HapiReply.reply);
             Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
             Sinon.assert.calledOnce(HapiReply.response.code);
@@ -93,7 +93,7 @@ describe('Toki Hapi Bridge', () => {
 
         it('should set a code and then reply successfully', (done) => {
 
-            response.status(418).send('Some payload');
+            response.statusCode(418).send('Some payload');
             Sinon.assert.calledOnce(HapiReply.reply);
             Sinon.assert.calledWith(HapiReply.reply, 'Some payload');
             Sinon.assert.calledOnce(HapiReply.response.code);
